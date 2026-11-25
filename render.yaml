@@ -1,0 +1,34 @@
+# The agent runner on Render. The deploy form asks for every variable marked `sync: false`.
+services:
+  - type: worker
+    name: fzz-agent
+    runtime: image
+    image:
+      url: ghcr.io/forlizzidev/fzz-agent:latest
+    # A disk needs a paid instance: starter is the smallest one.
+    plan: starter
+    disk:
+      name: fzz-agent
+      mountPath: /home/fzz
+      sizeGB: 5
+    envVars:
+      - key: FZZ_CLOUD
+        value: render
+      - key: FZZ_HOST
+        sync: false
+      - key: FZZ_INVITE
+        sync: false
+      - key: FZZ_REPO
+        sync: false
+      - key: GH_TOKEN
+        sync: false
+      - key: FZZ_HARNESS
+        sync: false
+      - key: FZZ_ACCOUNT_KIND
+        sync: false
+      - key: FZZ_HARNESS_SECRET
+        sync: false
+      - key: FZZ_CONCURRENCY
+        sync: false
+      - key: FZZ_BYPASS
+        sync: false
